@@ -477,6 +477,8 @@
     "p4_RAG_vs_busca": "RAG busca semanticamente (meaningful). Tradicional busca por palavra-chave. Use RAG para encontrar insights escondidos.",
     "p5_decay_agressivo": "Notas antigas (<90 dias sem edição) perdem peso. Força a reatualizar conhecimento obsoleto.",
     "p6_integracao_github": "Nível 8 (futuro): commits automáticos, issues → notas, pull requests → decisões.",
-    "p7_privacy": "Tudo local. Embeddings podem ser offline (Hugging Face). ChromaDB é local."
+    "p7_privacy": "Tudo local. Embeddings podem ser offline (Hugging Face). ChromaDB é local.",
+
+  "credito": "Desenvolvido por AlejandroFadim (Analista de BI). Arquitetura de memória persistente, grafo de conhecimento, RAG local, automação via hooks."
   }
 }
