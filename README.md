@@ -1,266 +1,469 @@
-# Centro de Inteligência Analítica — Bootstrap Nível 4-6
+# 🧠 Sistema de Memória Persistente
 
-**Versão:** 4.2 (2026-04-14)  
-**Status:** 100% pronto para replicar  
-**Tempo de setup:** ~15 minutos
+**Inteligência Analítica Nível 4-6 — Arquitetura Obsidian Style**
+
+> Memória agressiva + Grafo de Conhecimento + RAG Local + Memory Decay + Automação via Hooks
 
 ---
 
-## 🚀 Quick Start (Para Seu Amigo)
+## 📊 O Que É Este Sistema?
 
-### Passo 1: Copie a Pasta
+Um **sistema completo de inteligência analítica** que funciona como sua "segunda mente":
+
+- ✅ **Captura TUDO automaticamente** (pessoas, conceitos, decisões, insights)
+- ✅ **Conecta informações** em grafo de conhecimento (25+ nós, 188+ links)
+- ✅ **Busca semântica** em sua base de conhecimento (RAG local)
+- ✅ **Memória temporal** — notas antigas perdem peso automaticamente
+- ✅ **Automação** — hooks que regeneram grafo, extraem entidades, detectam gaps
+- ✅ **Continua entre sessões** — você nunca perde contexto
+
+**Status:** ✅ Operacional (Nível 4-6) | 🚀 Roadmap para Nível 7-8
+
+---
+
+## 🎯 Para Quem É?
+
+- **BI Analysts** — aprendendo base de dados, explorando SQL
+- **Data Scientists** — rastreando experimentos, insights, decisões
+- **Product Managers** — documentando roadmap, feedback, estratégia
+- **Consultores** — mantendo contexto entre múltiplos clientes
+- **Qualquer profissional** — que precisa de inteligência acumulada
+
+---
+
+## 🚀 Quick Start (15 minutos)
+
+### **1. Copie Esta Pasta**
+
 ```bash
-cd C:\Users\seu_usuario\
-git clone <este_repositorio> seu_centro_inteligencia
-cd seu_centro_inteligencia
+# Opção 1: Git
+git clone https://github.com/AlejandroFadim/Sistema-de-memoria-persistente seu_centro_ia
+cd seu_centro_ia
+
+# Opção 2: Download manual
+# Baixe como ZIP → descompacte em C:\seu_centro_ia
 ```
 
-### Passo 2: Abra no Claude Code
+### **2. Instale Dependências**
+
 ```bash
-# Na pasta raiz do seu centro
+pip install openpyxl pandas networkx flask chroma-db openai
+```
+
+### **3. Abra no Claude Code**
+
+```bash
 claude-code .
 ```
 
-### Passo 3: Execute Bootstrap
-Cole no chat do Claude Code:
+### **4. Cole Este Comando no Chat**
 
 ```
-Você é meu agente de inteligência analítica. Vamos configurar um centro de inteligência Nível 4-6 (grafo + RAG + decay + hooks).
-
-Leia: _templates/BOOTSTRAP_INTELIGENCIA.json
-
-Execute a FASE 1-6 de bootstrap_6_passos completa. Depois pergunte 3 coisas:
-1. Qual é a empresa e segmento?
-2. Quais são os principais clientes/projetos?
-3. Qual é seu cargo e ferramentas?
+/iniciar
 ```
 
-### Passo 4: Deixar Rodar
-Agente cria tudo automaticamente:
-- ✅ Estrutura de pastas
-- ✅ Arquivos base (CLAUDE.md, MEMORY.md, etc.)
-- ✅ Scripts Python (15 scripts)
-- ✅ Configuração de hooks
-- ✅ Conceitos iniciais baseado nas respostas
-
----
-
-## 📚 Documentação Completa
-
-### Para Entender o Sistema
-1. **BOOTSTRAP_INTELIGENCIA.json** — Especificação técnica completa (4.2 KB)
-   - 7 regras de memória agressiva
-   - 15 scripts Python documentados
-   - Configuração de hooks (Stop + PreToolUse)
-   - Roadmap 8 níveis
-   - Exemplos de uso
-
-2. **PADRAO_MEMORIA.md** — Como estruturar memórias
-3. **RAG_GUIA.md** — Como buscar semanticamente
-4. **ROADMAP_MEMORIA_AVANCADA.md** — Evolução do sistema
-
----
-
-## 🎯 Protocolo de Memória (7 Regras AGRESSIVAS)
-
-Sempre que você menciona algo relevante, agente captura **AUTOMATICAMENTE**:
-
-| Regra | Se Você Disser | Agente Cria |
-|-------|---|---|
-| **1** | "Weverson é meu chefe" | `memoria/pessoas/weverson.md` |
-| **2** | "Sortimento é 50% da nota" | `memoria/conceitos/sortimento.md` |
-| **3** | "Decidimos usar Haiku padrão" | `memoria/decisoes/2026-04-14_usar_haiku.md` |
-| **4** | Menciona Weverson + arquivo existe | Cria `[[weverson]]` (wikilink) |
-| **5** | Aprendi algo sobre Sortimento | Atualiza `conceitos/sortimento.md` (não duplica) |
-| **6** | Criou/atualizou arquivo(s) | Avisa: `📝 Memória: [criado: X] [atualizado: Y]` |
-| **7** | Ao encerrar sessão | Hook Stop: roda auto_memoria.py automático |
-
----
-
-## 🔧 Scripts (15 Python)
-
-| Script | Trigger | O que faz |
-|--------|---------|----------|
-| `auto_memoria.py` | Hook Stop (automático) | Regenera grafo + timeline + registra sessão |
-| `classificar_modelo.py` | Hook PreToolUse (automático) | Detecta tarefa complexa → sugere Sonnet |
-| `grafo_memoria.py` | Manual ou via outro script | Constrói grafo JSON/HTML (vis.js) |
-| `rag_memoria.py` | Manual | Busca semântica em sua base |
-| `memory_decay.py` | Manual (periódico) | Notas antigas perdem peso (exponencial) |
-| `entity_extractor.py` | Manual | Detecta pessoas, conceitos, decisões (NER) |
-| `anomaly_detector.py` | Manual | Encontra links quebrados, orfãos, gaps |
-| `gap_analyzer.py` | Manual | Que documentação falta? |
-| `timeline_generator.py` | Manual | Timeline visual de eventos |
-| ... + 6 mais | — | Utilitários e validadores |
-
----
-
-## 🌐 Grafo de Conhecimento
-
-**Gerado automaticamente:** `output/grafo_memoria.html`
-
-- **Nós:** Conceitos, Pessoas, Projetos, Decisões
-- **Arestas:** Relacionamentos (wikilinks)
-- **Cores:** Verde (conceito), Laranja (pessoa), Ciano (projeto), Vermelho (decisão)
-- **Tamanho:** Proporcional ao weight (importância)
-- **Temperatura:** Vermelho (recente) → Azul (antiga)
-- **Interatividade:** Clique → aponta para / referenciado por
-
----
-
-## 💾 Estrutura de Pastas (Pronta)
+Sistema carrega contexto. Depois:
 
 ```
-seu_centro_inteligencia/
-├── CLAUDE.md                          (missão + 7 regras + tabela projetos)
+/bootstrap
+```
+
+Responda 3 perguntas simples:
+- **Qual é sua empresa?** (ex: "Sou Analytics em fintech")
+- **Quais são seus projetos?** (ex: "Dashboard Transações, Relatório Fraude")
+- **Qual é seu cargo?** (ex: "Analista de Dados Senior")
+
+**✅ Pronto!** Sistema operacional em ~15 minutos.
+
+---
+
+## 📖 Como Usar (Passo-a-Passo)
+
+### **Dia 1 — Primeira Sessão**
+
+#### Passo 1: Inicializar
+```bash
+claude-code .
+```
+
+No chat, digite:
+```
+/iniciar
+```
+
+**Sistema mostra:**
+```
+✅ Sistema de Inteligência carregado.
+
+Quem você é:
+- Cargo: Analista de Dados Senior
+- Empresa: ACME Corp Fintech
+- Clientes: Banco XYZ, Varejo ABC
+- Ferramentas: Power BI, SQL, Python
+
+Projetos ativos: 3
+- Dashboard Transações (em andamento)
+- Relatório Fraude (planejado)
+- Análise de Churn (em análise)
+
+Pronto para trabalhar. O que vamos fazer?
+```
+
+#### Passo 2: Trabalhe Normalmente
+
+Você diz algo como:
+```
+Preciso explorar a tabela de transações no banco de dados.
+Quantas transações temos por dia? Há padrões sazonais?
+```
+
+**Sistema faz:**
+1. ✅ Escreve query SQL
+2. ✅ Executa análise
+3. ✅ **CAPTURA AUTOMATICAMENTE:**
+   - Novo conceito: `memoria/conceitos/transacoes.md`
+   - Decisão: `memoria/decisoes/2026-04-14_explorar_transacoes.md`
+   - Insight: "3.2M transações/dia em média"
+
+#### Passo 3: Ao Terminar
+
+Digite:
+```
+/encerrar
+```
+
+**Automático:**
+- ✅ Grafo regenerado (`output/grafo_memoria.html`)
+- ✅ Sessão registrada (`memoria/sessoes/sessao_2026-04-14.md`)
+- ✅ Backlinks atualizados
+- ✅ Próximos passos mapeados
+
+---
+
+### **Dia 2 — Continuidade**
+
+```bash
+claude-code .
+```
+
+Digite:
+```
+/iniciar
+```
+
+**Sistema mostra:**
+```
+✅ Sistema carregado.
+
+Últimos próximos passos:
+- Você estava explorando transações
+- Descobriu: 3.2M/dia em média, padrão semanal
+- Próximo: investigar causa da sazonalidade
+
+Grafo conecta:
+  Transações ← Banco XYZ ← Casos de Uso ← PDV
+  Transações ← Sazonalidade ← [novo conceito]
+
+Pronto para continuar?
+```
+
+Você já tem contexto completo. **Continua exatamente de onde parou.**
+
+---
+
+## 🧭 Arquitetura em 8 Níveis
+
+```
+┌─────────────────────────────────────────┐
+│         NÍVEL 8: Inteligência Proativa  │ 🔮 Futuro
+│  (Alertas automáticos, recomendações)   │ 2026-06-01
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│     NÍVEL 7: Multi-Agente Especializado │ 🚀 Próximo
+│  (Agentes dados, negócio, design, memory)│ 2026-05-01
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│  NÍVEL 6: Extração Automática + Hooks   │ ✅ AQUI
+│  (NER, PreToolUse, Stop, gap analysis)  │ Operacional
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│    NÍVEL 5: Memória Temporal + Decay    │ ✅ Implementado
+│   (Timeline, decay exponencial, anomalias) │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│    NÍVEL 4: Grafo de Conhecimento       │ ✅ Implementado
+│  (25+ nós, 188+ links, vis.js interativo) │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│      NÍVEL 3: RAG Local + Embeddings    │ ✅ Implementado
+│  (Busca semântica em sua base, ChromaDB) │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│     NÍVEL 2: Índice Semântico + Tags    │ ✅ Implementado
+│  (MEMORY.md, frontmatter, wikilinks)    │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│          NÍVEL 1: Memória Estática      │ ✅ Implementado
+│        (Arquivos .md em pasta)          │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## 💡 Exemplo Real: Fintech
+
+### **Cenário**
+Você é novo em uma fintech. Precisa aprender:
+- Base de transações (100M+ linhas/mês)
+- Regras de fraude
+- Padrões de clientes
+
+### **Sem Sistema**
+```
+Dia 1: Exploro tabelas, tomo notas (ou não)
+Dia 5: "Qual era aquele padrão mesmo?"
+       → Procuro em emails, chats, notebooks
+       → Perco 1h
+Dia 10: Novo projeto similar
+        → Reexploro tudo (já fiz isso?)
+        → Reescrevo queries
+        → Desperdiço 8h em repetição
+```
+
+### **Com Sistema**
+```
+Dia 1: Exploro tabelas
+       ✅ Sistema cria: memoria/conceitos/transacoes.md
+       ✅ Conecta: Transação ← Cliente ← Fraude
+
+Dia 5: Preciso lembrar
+       → /iniciar carrega contexto
+       → RAG busca "padrão semanal"
+       → Encontra em 30 segundos
+
+Dia 10: Novo projeto (Churn)
+        → Sistema sugere: "Churn relaciona com Transações (já explorado)"
+        → Reutiliza 80% do contexto
+        → Ganha 6h produtivas
+```
+
+---
+
+## 📁 Estrutura de Pastas (Criada Automaticamente)
+
+```
+seu_centro_ia/
+├── CLAUDE.md                          ← Missão + 7 regras
 ├── memoria/
-│   ├── MEMORY.md                      (índice: user, feedback, project, reference, conceito, pessoa, decisao)
-│   ├── PADRAO_MEMORIA.md              (template frontmatter)
-│   ├── user_profile.md                (seu perfil)
-│   ├── feedback_memoria.md            (regras de colaboração)
-│   ├── RAG_GUIA.md                    (busca semântica)
-│   ├── DECAY_CONFIG.json              (parâmetros de decay)
-│   ├── conceitos/                     (1 conceito = 1 arquivo)
-│   ├── pessoas/                       (stakeholders, chefes, clientes)
-│   ├── decisoes/                      (YYYY-MM-DD_titulo.md)
-│   └── sessoes/                       (sessao_YYYY-MM-DD.md — automático)
-├── scripts/
+│   ├── MEMORY.md                      ← Índice (carregado sempre)
+│   ├── PADRAO_MEMORIA.md              ← Template de estrutura
+│   ├── user_profile.md                ← Seu perfil (preenchido)
+│   ├── feedback_memoria.md            ← Regras de colaboração
+│   ├── RAG_GUIA.md                    ← Como buscar
+│   ├── DECAY_CONFIG.json              ← Parâmetros decay
+│   ├── conceitos/                     ← 1 conceito = 1 arquivo
+│   │   ├── transacoes.md              (criado automaticamente)
+│   │   ├── fraude.md
+│   │   └── ...
+│   ├── pessoas/                       ← Stakeholders
+│   │   ├── seu_chefe.md               (criado automaticamente)
+│   │   └── ...
+│   ├── decisoes/                      ← Decisões datadas
+│   │   ├── 2026-04-14_explorar_transacoes.md
+│   │   └── ...
+│   └── sessoes/                       ← Diários de sessão (automático)
+│       ├── sessao_2026-04-14.md
+│       └── ...
+├── scripts/                           ← 15 scripts Python
 │   ├── auto_memoria.py                (hook Stop)
 │   ├── classificar_modelo.py          (hook PreToolUse)
-│   ├── grafo_memoria.py               (grafo JSON/HTML)
+│   ├── grafo_memoria.py               (constrói grafo)
 │   ├── rag_memoria.py                 (busca semântica)
 │   ├── memory_decay.py                (decay temporal)
-│   ├── entity_extractor.py            (NER automática)
-│   ├── anomaly_detector.py            (detecta problemas)
-│   └── ... (8 mais scripts)
-├── _templates/
-│   ├── BOOTSTRAP_INTELIGENCIA.json    (este arquivo)
-│   ├── ROADMAP_MEMORIA_AVANCADA.md   (8 níveis)
-│   └── TEMPLATE_CLAUDE_PROJETO.md    (novos projetos)
+│   └── ... (10 mais)
 ├── .claude/
-│   └── settings.local.json            (hooks + modelo)
+│   └── settings.local.json            ← Hooks (Stop + PreToolUse)
 ├── output/
 │   ├── grafo_memoria.html             (gerado automaticamente)
-│   ├── grafo_memoria.json             (dados do grafo)
-│   ├── timeline.html                  (eventos)
-│   ├── anomalies.json                 (alertas)
-│   └── gap_analysis.json              (gaps)
-└── <nome-projeto>/
-    ├── CLAUDE.md                      (contexto do projeto)
-    ├── DATA/                          (dados de entrada)
-    └── output/                        (resultados)
+│   ├── grafo_memoria.json
+│   ├── timeline.html
+│   ├── anomalies.json
+│   └── gap_analysis.json
+└── <seu_projeto>/                     ← Projetos individuais
+    ├── CLAUDE.md
+    ├── DATA/
+    └── output/
 ```
 
 ---
 
-## ⚙️ Configuração (Automática via Bootstrap)
+## ⚙️ Comandos Principais
 
-**File:** `.claude/settings.local.json`
-
-```json
-{
-  "model": "claude-haiku-4-5-20251001",
-  "hooks": {
-    "Stop": [{
-      "hooks": [{"type": "command", "command": "py '<RAIZ>/scripts/auto_memoria.py'"}]
-    }],
-    "PreToolUse": [{
-      "matcher": "Bash|Write|Edit|Agent|NotebookEdit",
-      "hooks": [{"type": "command", "command": "py '<RAIZ>/scripts/classificar_modelo.py'"}]
-    }]
-  }
-}
+### **Iniciar Sessão**
 ```
+/iniciar
+```
+Carrega contexto completo: CLAUDE.md, MEMORY.md, últimas sessões, grafo.
+
+### **Bootstrap (Primeira Vez)**
+```
+/bootstrap
+```
+Cria estrutura automática. Responda 3 perguntas (empresa, projetos, cargo).
+
+### **Encerrar Sessão**
+```
+/encerrar
+```
+Hook Stop executa: regenera grafo, registra sessão, atualiza backlinks.
+
+### **Compactar (Avançado)**
+```
+/compactar
+```
+Executa todas as análises: memory_decay, anomaly_detector, gap_analyzer, entity_extractor.
+
+### **Buscar Semanticamente (Avançado)**
+```
+/rag "sua pergunta aqui"
+```
+Busca semântica em memoria/ por relevância. Retorna top-5 arquivos.
 
 ---
 
-## 🎓 Aprender o Sistema
+## 🎓 Curva de Aprendizado
 
-### Nível 1: O Básico (30 min)
-- Leia `CLAUDE.md` raiz
-- Leia `memoria/PADRANO_MEMORIA.md`
-- Explore `output/grafo_memoria.html` (veja as conexões)
-
-### Nível 2: Uso Diário (1 semana)
-- Comece a trabalhar (dados, dashboards, análises)
-- Agente captura automaticamente (7 regras)
-- Use `/iniciar` ao abrir sessão
-- Veja grafo atualizar após cada resposta
-
-### Nível 3: Avançado (2 semanas)
-- Execute scripts manualmente:
-  - `py scripts/rag_memoria.py 'sua pergunta'`
-  - `py scripts/anomaly_detector.py`
-  - `py scripts/gap_analyzer.py`
-- Customize DECAY_CONFIG.json
-- Integre com seus sistemas
-
-### Nível 4+: Expert (1 mês)
-- Entenda cada um dos 15 scripts
-- Contribua melhorias
-- Configure RAG com seus embeddings
-- Integre com GitHub/Slack (Nível 8 futuro)
+| Tempo | O Que Você Sabe |
+|-------|-----------------|
+| **Hora 0-1** | "Entendi, vou tentar" |
+| **Hora 1-2** | "Como busco na memória?" → Usa `/rag` |
+| **Dia 1-2** | "Sistema está capturando coisas sozinho!" |
+| **Semana 1** | "Grafo mostra conexões que não esperava" |
+| **Semana 2** | "Consigo encontrar insights antigos em 10s" |
+| **Semana 3** | "Comecei a usar RAG semanticamente" |
+| **Semana 4+** | "Reutilizo contexto entre projetos" |
 
 ---
 
-## 🆘 Troubleshooting
+## 📊 Métricas (Sistema em Produção)
+
+Sistema testado em produção (SPOT Promo × Camil):
+
+- ✅ **25+ nós no grafo** (conceitos, pessoas, projetos)
+- ✅ **188+ links** (relacionamentos)
+- ✅ **7+ projetos** ativos em paralelo
+- ✅ **4+ decisões** registradas por semana
+- ✅ **15 scripts** funcionais
+- ✅ **0 contexto perdido** entre sessões
+
+---
+
+## ❓ FAQ
+
+### P: Preciso saber programação?
+**R:** Não para começar. Sistema funciona via Claude Code (interface IA). Python é para customizações avançadas.
+
+### P: Funciona com qualquer domínio?
+**R:** Sim! Funciona com SQL, Power BI, dados, análises, qualquer empresa, qualquer indústria.
+
+### P: Quanto custa?
+**R:** Haiku (padrão) é ~10x mais barato que Sonnet. Tudo local em seu PC.
+
+### P: Posso compartilhar com um colega?
+**R:** Sim! Clone para nova pasta com novo perfil. Sistema independente por pasta.
+
+### P: Como backup a memória?
+**R:** Pasta `memoria/` é seu backup. Versione no Git. `output/` é gerado — não versione.
+
+### P: Posso integrar GitHub/Slack?
+**R:** Sim! Nível 8 (futuro) terá isso automático. Por enquanto manual.
+
+---
+
+## 🚨 Troubleshooting
 
 | Problema | Solução |
 |----------|---------|
-| Hook não roda | Verifique `<RAIZ>` em settings.local.json (path absoluto) |
+| `/iniciar` não carrega | Execute `/bootstrap` primeiro |
 | Grafo não atualiza | Execute manualmente: `py scripts/auto_memoria.py` |
 | RAG não funciona | Instale: `pip install chroma-db openai` |
-| Python não encontrado | Use caminho completo: `C:\Python\python.exe` |
-| Backlinks quebrados | Run: `py scripts/anomaly_detector.py` |
+| Wikilinks quebrados | Execute: `py scripts/anomaly_detector.py` |
+| Gaps na memória | Execute: `py scripts/gap_analyzer.py` |
 
 ---
 
-## 📊 Roadmap (8 Níveis)
+## 🔄 Workflow Típico (Diário)
 
-| Nível | Status | Features |
-|-------|--------|----------|
-| 1 | ✅ | Arquivos .md |
-| 2 | ✅ | Índice + tags + wikilinks |
-| 3 | ✅ | RAG local |
-| 4 | ✅ | Grafo de conhecimento |
-| 5 | ✅ | Memory decay temporal |
-| 6 | ✅ | Extração automática + hooks |
-| 7 | ❌ Futuro | Multi-agente especializado |
-| 8 | ❌ Futuro | Inteligência proativa (cron/webhook) |
+```
+MANHÃ:
+  09:00 — claude-code .
+  09:05 — /iniciar (carrega contexto)
+  09:10 — Trabalha normalmente ("Preciso analisar...")
+          Sistema captura automaticamente
 
----
+DURANTE O DIA:
+  Você menciona: "Decidi usar Power BI para dashboard"
+  Sistema cria: memoria/decisoes/2026-04-14_usar_powerbi.md
+  Conecta: [[dashboard]] [[power_bi]] [[projeto_x]]
 
-## 📝 Primeiros Passos com Seu Amigo
+FIM DO DIA:
+  17:00 — /encerrar (ou /compactar)
+  Hook Stop executa: memory_decay + auto_memoria + entity_extractor
+  ✅ Grafo atualizado
+  ✅ Sessão registrada
+  ✅ Próximos passos mapeados
 
-1. **Ele cria pasta nova** → executa bootstrap
-2. **Responde 3 perguntas:**
-   - Empresa?
-   - Clientes/Projetos?
-   - Seu cargo?
-3. **Sistema cria conceitos iniciais** com base nas respostas
-4. **Ele começa a trabalhar** → agente captura automaticamente
-5. **Ao final do dia** → `/encerrar` (ou deixa Stop rodar) → grafo atualiza
-6. **Próxima sessão** → `/iniciar` → contexto carregado, RAG pronto
-
----
-
-## 💡 Pro Tips
-
-- **Use /iniciar sempre** — carrega contexto automático
-- **Mencione decisões** — agente cria nota de decisão
-- **Cruzamento entre projetos** — diga "isso impacta Projeto X" → grafo conecta
-- **Export do grafo** — `output/grafo_memoria.html` é um relatório completo
-- **Backup** — versione `memoria/` no Git (não versione `output/`)
+PRÓXIMO DIA:
+  09:05 — /iniciar
+  → Sistema carrega TUDO de onde parou
+  → Você continua imediatamente
+```
 
 ---
 
-## 🔗 Links
+## 📚 Arquivos Importantes
 
-- **Especificação:** `_templates/BOOTSTRAP_INTELIGENCIA.json`
-- **Padrão de memória:** `memoria/PADRAO_MEMORIA.md`
-- **Guia RAG:** `memoria/RAG_GUIA.md`
-- **Roadmap:** `_templates/ROADMAP_MEMORIA_AVANCADA.md`
+| Arquivo | Propósito |
+|---------|----------|
+| **BOOTSTRAP_INTELIGENCIA.json** | Especificação técnica (482 linhas) |
+| **README.md** | Este guia (o que está lendo) |
+| **CLAUDE.md** (raiz) | Missão + 7 regras + tabela projetos |
+| **memoria/PADRAO_MEMORIA.md** | Como estruturar novas memórias |
+| **memoria/RAG_GUIA.md** | Como buscar semanticamente |
+| **_templates/ROADMAP_MEMORIA_AVANCADA.md** | Roadmap 8 níveis |
 
 ---
 
-**Pronto para replicar!** 🚀  
-Seu amigo pode começar agora mesmo. Qualquer dúvida, envie este README + JSON.
+## 🚀 Começar Agora
+
+1. **Clone/Copie esta pasta**
+2. **Instale dependências:** `pip install -r requirements.txt`
+3. **Abra no Claude Code:** `claude-code .`
+4. **Execute:** `/iniciar`
+5. **Execute:** `/bootstrap`
+6. **Trabalhe normalmente**
+
+**Sistema captura tudo automaticamente.** ✅
+
+---
+
+## 📞 Suporte / Feedback
+
+Este sistema foi desenvolvido e testado em produção.
+
+Dúvidas? Ideias? Abra issue ou discuta com seu agente de IA.
+
+---
+
+**v4.2 — 2026-04-14**
+
+Desenvolvido em produção para SPOT Promo × Camil
+
+Feito com 🧠 + 🔗 + ⚡ + ☕
