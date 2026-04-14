@@ -464,6 +464,6 @@ Dúvidas? Ideias? Abra issue ou discuta com seu agente de IA.
 
 **v4.2 — 2026-04-14**
 
-Desenvolvido em produção para SPOT Promo × Camil
+Desenvolvido por AlejandroFadim (Analista de BI)
 
 Feito com 🧠 + 🔗 + ⚡ + ☕
