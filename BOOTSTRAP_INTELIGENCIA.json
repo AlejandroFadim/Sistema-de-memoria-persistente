@@ -1,0 +1,482 @@
+{
+  "nome": "Centro de Inteligência Analítica — Nível 4-6 Completo",
+  "versao": "4.2",
+  "nivel_atual": "4 (Knowledge Graph + RAG + Decay) → 6 Parcial (Hooks + Extração Automática)",
+  "data_atualizacao": "2026-04-14",
+  "descricao": "Sistema de memória persistente estilo Obsidian com grafo de conhecimento, RAG local, decay temporal, extração automática de entidades. Agente é sua segunda mente — captura TUDO, antecipa insights.",
+
+  "filosofia": {
+    "conceito": "Obsidian + Knowledge Graph + RAG Local + Memory Decay + Hooks Automáticos",
+    "principios": [
+      "Memória persistente entre sessões: tudo relevante é salvo em arquivos visíveis (Obsidian-like)",
+      "Agressividade: você menciona → eu capturo (pessoas, decisões, conceitos, insights) SEM esperar",
+      "Grafo de conhecimento: conceitos interligados, descoberta de padrões emergentes",
+      "RAG local: busca semântica em sua base de conhecimento (embeddings + ChromaDB)",
+      "Memory decay: notas antigas perdem peso automaticamente (exponencial com piso)",
+      "Extração automática: NER para detectar novos conceitos, pessoas, decisões",
+      "Inteligência temporal: timeline de eventos, anomalias detectadas automaticamente",
+      "Valor operacional: sempre focar em insights para a operação, antecipar problemas",
+      "Econômico: Haiku por padrão, Sonnet sob demanda (via hook automático)",
+      "Cruzamento entre projetos: conectar dados de múltiplas fontes → insights únicos"
+    ]
+  },
+
+  "estrutura_de_pastas": {
+    "raiz": "<nome-do-centro>/",
+    "obrigatorias": [
+      "<raiz>/CLAUDE.md",
+      "<raiz>/memoria/",
+      "<raiz>/memoria/MEMORY.md",
+      "<raiz>/memoria/PADRAO_MEMORIA.md",
+      "<raiz>/memoria/user_profile.md",
+      "<raiz>/memoria/feedback_memoria.md",
+      "<raiz>/memoria/RAG_GUIA.md",
+      "<raiz>/memoria/DECAY_CONFIG.json",
+      "<raiz>/memoria/conceitos/",
+      "<raiz>/memoria/pessoas/",
+      "<raiz>/memoria/decisoes/",
+      "<raiz>/memoria/sessoes/",
+      "<raiz>/scripts/",
+      "<raiz>/scripts/auto_memoria.py",
+      "<raiz>/scripts/classificar_modelo.py",
+      "<raiz>/scripts/grafo_memoria.py",
+      "<raiz>/scripts/rag_memoria.py",
+      "<raiz>/scripts/rag_reranker.py",
+      "<raiz>/scripts/memory_decay.py",
+      "<raiz>/scripts/entity_extractor.py",
+      "<raiz>/scripts/anomaly_detector.py",
+      "<raiz>/scripts/gap_analyzer.py",
+      "<raiz>/scripts/timeline_generator.py",
+      "<raiz>/_templates/",
+      "<raiz>/_templates/BOOTSTRAP_INTELIGENCIA.json",
+      "<raiz>/_templates/ROADMAP_MEMORIA_AVANCADA.md",
+      "<raiz>/_templates/TEMPLATE_CLAUDE_PROJETO.md",
+      "<raiz>/.claude/settings.local.json",
+      "<raiz>/output/grafo_memoria.html",
+      "<raiz>/output/grafo_memoria.json",
+      "<raiz>/output/timeline.html",
+      "<raiz>/output/anomalies.json",
+      "<raiz>/output/gap_analysis.json"
+    ],
+    "por_projeto": [
+      "<raiz>/<nome-projeto>/CLAUDE.md",
+      "<raiz>/<nome-projeto>/DATA/",
+      "<raiz>/<nome-projeto>/output/"
+    ]
+  },
+
+  "protocolo_memoria_agressivo_7_regras": {
+    "descricao": "7 regras OBRIGATÓRIAS — agente é sua SEGUNDA MENTE. Nunca pedir permissão para salvar.",
+    "regra_1": {
+      "nome": "Pessoas & Stakeholders",
+      "descricao": "Qualquer pessoa mencionada (chefe, cliente, colega, decisor) → crie memoria/pessoas/<nome>.md",
+      "campos": ["Cargo", "Empresa", "Contexto", "Relacionamentos", "Decisões que tomou"],
+      "exemplo": "Weverson (chefe SPOT) → memoria/pessoas/weverson.md com [[spot]], [[camil]]"
+    },
+    "regra_2": {
+      "nome": "Conceitos Novos",
+      "descricao": "Entidade, KPI, processo, ferramenta mencionados → crie memoria/conceitos/<nome>.md",
+      "campos": ["Definição", "Contexto", "Por que existe", "Quem usa", "Métricas"],
+      "exemplo": "Sortimento → memoria/conceitos/sortimento.md com links [[loja_perfeita]], [[camil]]"
+    },
+    "regra_3": {
+      "nome": "Decisões em Conversa",
+      "descricao": "Qualquer decisão/insight mencionado → crie memoria/decisoes/YYYY-MM-DD_<titulo>.md",
+      "campos": ["Decisão", "Motivo", "Impacto", "Quem aprova", "Próximas ações"],
+      "exemplo": "Usar Haiku padrão → memoria/decisoes/2026-04-13_modelo_haiku_padrao.md"
+    },
+    "regra_4": {
+      "nome": "Wikilinks Agressivos",
+      "descricao": "Em todo .md: [[pessoa]], [[conceito]], [[projeto]], [[decisao]]",
+      "escopo": "Se mencionou Weverson e há memoria/pessoas/weverson.md → use [[weverson]] em todo link",
+      "bidireccional": "Backlinks automáticos regenerados via hook Stop"
+    },
+    "regra_5": {
+      "nome": "Atualizar Existente Sempre",
+      "descricao": "Conceito já existe + aprendi dado novo → ATUALIZAR, nunca duplicar",
+      "escopo": "Adicione seção nova ou campo existente. Mantenha data de última atualização no frontmatter."
+    },
+    "regra_6": {
+      "nome": "Anotação ao Final de Cada Resposta",
+      "descricao": "Se criei/atualizei notas, aviso com badge 📝",
+      "formato": "📝 Memória: [criado: pessoas/weverson.md] [atualizado: loja_perfeita.md]"
+    },
+    "regra_7": {
+      "nome": "Encerramento de Sessão",
+      "descricao": "Ao encerrar (hook Stop ou /encerrar), protocolo completo:",
+      "passos": [
+        "Preencha memoria/sessoes/sessao_YYYY-MM-DD.md com TUDO aprendido (estruturado)",
+        "Atualize project_*.md com status atual",
+        "Atualize MEMORY.md se criou conceitos/pessoas/decisões novas",
+        "Regenere grafo de conhecimento via auto_memoria.py",
+        "Confirme: 'Memória salva. Pode encerrar.'"
+      ]
+    }
+  },
+
+  "scripts_completos": {
+    "descricao": "15 scripts Python que rodam via hooks ou manual — cada um com propósito específico",
+    "scripts": [
+      {
+        "nome": "auto_memoria.py",
+        "trigger": "Hook Stop (automático ao final de cada resposta)",
+        "funcao": [
+          "Constrói grafo JSON: nós (conceitos, pessoas, projetos) + arestas (relacionamentos)",
+          "Gera output/grafo_memoria.html com vis.js (estilo modelo atômico: orbitas, cores por temperatura)",
+          "Gera output/timeline.html: sequência de eventos com datas",
+          "Atualiza backlinks em todos os .md de memoria/",
+          "Registra sessão com timestamp, arquivo(s) tocado(s), mudanças realizadas",
+          "Calcula peso de cada nó (recência × importância × frequência)"
+        ],
+        "uso": "Automático (hook Stop) ou manual: py scripts/auto_memoria.py",
+        "saida": "output/grafo_memoria.json | output/grafo_memoria.html | memoria/sessoes/sessao_YYYY-MM-DD.md"
+      },
+      {
+        "nome": "classificar_modelo.py",
+        "trigger": "Hook PreToolUse (quando vai usar Bash, Write, Edit, Agent, NotebookEdit)",
+        "funcao": [
+          "Lê stdin: informações da tool (nome, input, contexto)",
+          "Classifica tarefa como SIMPLES ou COMPLEXA",
+          "Palavras simples: dax, medida, coluna, sintaxe, erro, typo, .md, settings",
+          "Palavras complexas: arquitetura, etl, pipeline, refactor, modelagem, análise, otimiz, script",
+          "Imprime sugestão em stderr: '[MODELO] Haiku ativo' ou 'Considere /model claude-sonnet-4-6'"
+        ],
+        "uso": "Automático (hook PreToolUse)",
+        "saida": "Mensagem no stderr (não interrompe, apenas sugere)"
+      },
+      {
+        "nome": "grafo_memoria.py",
+        "trigger": "Manual ou em scripts posteriores",
+        "funcao": [
+          "Lê todos os .md da pasta memoria/",
+          "Extrai nós: [[conceito]], [[pessoa]], [[projeto]], [[decisao]]",
+          "Constrói arestas: quem aponta para quem (backlinks)",
+          "Gera output/grafo_memoria.json: estrutura NetworkX-compatível",
+          "Gera output/grafo_memoria.png: visualização estática",
+          "Modo --texto: adjacência no terminal",
+          "Modo --backlinks <nome>: mostra quem aponta para aquele nó"
+        ],
+        "uso": "py scripts/grafo_memoria.py | py scripts/grafo_memoria.py --texto | py scripts/grafo_memoria.py --backlinks sortimento",
+        "saida": "output/grafo_memoria.json | output/grafo_memoria.png | stdout (modo texto)"
+      },
+      {
+        "nome": "rag_memoria.py",
+        "trigger": "Manual (busca semântica em sua base)",
+        "funcao": [
+          "Busca semântica em memoria/ usando embeddings (OpenAI/Hugging Face)",
+          "Ordena resultados por similaridade ao prompt",
+          "Retorna top-K arquivos mais relevantes com snippets",
+          "Usa ChromaDB para caching (evita reprocessar)",
+          "Filtra por tags/tipo se especificado"
+        ],
+        "uso": "py scripts/rag_memoria.py 'qual é a nota do loja perfeita'",
+        "saida": "Ranking de arquivos por relevância (com excerpts)"
+      },
+      {
+        "nome": "rag_reranker.py",
+        "trigger": "Manual (melhora ranking de busca)",
+        "funcao": [
+          "Reranking de resultados de busca usando: 0.4×recência + 0.3×importância + 0.3×frequência",
+          "Recência: dados recentes têm mais peso",
+          "Importância: conceitos mencionados em múltiplos arquivos têm peso",
+          "Frequência: quantas vezes mencionado nesta sessão"
+        ],
+        "uso": "py scripts/rag_reranker.py <arquivo_de_resultados_json>",
+        "saida": "Ranking reordenado (JSON)"
+      },
+      {
+        "nome": "memory_decay.py",
+        "trigger": "Manual (decai notas antigas periodicamente)",
+        "funcao": [
+          "Aplica decay exponencial: weight = 0.5^(dias_desde_criacao/90) com piso de 0.1",
+          "Lê DECAY_CONFIG.json: configuração de parâmetros",
+          "Atualiza frontmatter de cada .md com 'weight' calculado",
+          "Reseta peso para 1.0 se arquivo foi editado recentemente",
+          "Log: quais notas decaíram, quais ainda estão ativas"
+        ],
+        "uso": "py scripts/memory_decay.py",
+        "saida": "Arquivos .md com campo 'weight' atualizado + decay.log"
+      },
+      {
+        "nome": "entity_extractor.py",
+        "trigger": "Manual ou via hook (extrai pessoas, conceitos, decisões automaticamente)",
+        "funcao": [
+          "NER (Named Entity Recognition): detecta padrões em suas respostas",
+          "Tipos: PESSOA, CONCEITO, DECISAO, KPI, FERRAMENTA",
+          "Cria arquivos automaticamente se não existirem",
+          "Evita duplicatas: verifica se já existe antes de criar",
+          "Pronto para ser chamado por hook PreCompact (futuro)"
+        ],
+        "uso": "py scripts/entity_extractor.py <arquivo_sessao.md>",
+        "saida": "Novos arquivos em memoria/conceitos/, memoria/pessoas/, memoria/decisoes/"
+      },
+      {
+        "nome": "anomaly_detector.py",
+        "trigger": "Manual (detecta problemas na base de dados ou padrões estranhos)",
+        "funcao": [
+          "Analisa todos os .md em memoria/",
+          "Detecta: links quebrados, orfãos (nó sem entrada/saída), duplicatas",
+          "Detecta anomalias: KPIs fora do padrão, gaps de tempo, pessoas sem contexto",
+          "Gera output/anomalies.json com alertas (CRITICAL, WARNING, INFO)"
+        ],
+        "uso": "py scripts/anomaly_detector.py",
+        "saida": "output/anomalies.json com 11+ tipos de alertas"
+      },
+      {
+        "nome": "gap_analyzer.py",
+        "trigger": "Manual (encontra informações faltantes)",
+        "funcao": [
+          "Analisa: quais conceitos faltam documentação completa?",
+          "Quais projetos não têm CLAUDE.md?",
+          "Quais pessoas não têm descrição de relacionamentos?",
+          "Quais decisões não têm 'impacto' ou 'próximas ações'?",
+          "Gera relatório estruturado de gaps"
+        ],
+        "uso": "py scripts/gap_analyzer.py",
+        "saida": "output/gap_analysis.json com 24+ gaps tipificados"
+      },
+      {
+        "nome": "timeline_generator.py",
+        "trigger": "Manual (cria visualização temporal de eventos)",
+        "funcao": [
+          "Lê todas as datas em memoria/decisoes/, memoria/sessoes/, .md com 'date:' no frontmatter",
+          "Ordena cronologicamente",
+          "Gera output/timeline.html: interativa, com zoom, filtros"
+        ],
+        "uso": "py scripts/timeline_generator.py",
+        "saida": "output/timeline.html"
+      },
+      {
+        "nome": "classificar_modelo.py",
+        "trigger": "Hook PreToolUse (não é script complexo, é já mencionado acima)",
+        "descricao": "Reutilizado no protocolo de hooks"
+      }
+    ]
+  },
+
+  "configuracao_modelo_e_hooks": {
+    "descricao": "Otimização de custo: Haiku por padrão, Sonnet sob demanda com sugestão automática via hook",
+    "modelo_padrao": "claude-haiku-4-5-20251001",
+    "modelo_complexo": "claude-sonnet-4-6",
+    "modelo_mais_avancado": "claude-opus-4-6",
+    "como_usar": [
+      "Sessão abre em Haiku automaticamente (econômico: ~10x mais barato que Sonnet)",
+      "Hook PreToolUse classifica: se COMPLEXO, sugere /model claude-sonnet-4-6",
+      "Você digita /model claude-sonnet-4-6 se quiser força para tarefa pesada",
+      "Hook Stop roda auto_memoria.py automaticamente (regenera grafo + registra sessão)"
+    ],
+    "settings_local_json_completo": {
+      "model": "claude-haiku-4-5-20251001",
+      "permissions": {
+        "allow": [
+          "WebSearch",
+          "Bash(py scripts/*)",
+          "Bash(py -)"
+        ]
+      },
+      "hooks": {
+        "Stop": [
+          {
+            "matcher": "",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "py '<RAIZ>/scripts/auto_memoria.py'"
+              }
+            ]
+          }
+        ],
+        "PreToolUse": [
+          {
+            "matcher": "Bash|Write|Edit|Agent|NotebookEdit",
+            "hooks": [
+              {
+                "type": "command",
+                "command": "py '<RAIZ>/scripts/classificar_modelo.py'"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+
+  "frontmatter_nivel_4": {
+    "descricao": "Formato obrigatório para TODOS os arquivos de memória (Nível 4 com Knowledge Graph)",
+    "campos": {
+      "name": "Nome descritivo (para humanos)",
+      "description": "Uma linha — define relevância em buscas futuras (para RAG)",
+      "type": "user | feedback | project | reference | conceito | pessoa | decisao",
+      "date": "YYYY-MM-DD (data de criação)",
+      "tags": "[tag1, tag2, tag3] — para filtros semânticos",
+      "projeto": "nome-projeto ou 'global'",
+      "links": "[[conceito1]] [[pessoa1]] — wikilinks para grafo",
+      "weight": "0.0-1.0 (calculado por memory_decay.py, opcional)",
+      "last_updated": "YYYY-MM-DD (atualizado automaticamente)"
+    },
+    "exemplo_pessoa": "---\nname: Weverson\ndescription: Chefe do usuário, ponto de contato com clientes na Camil\ntype: pessoa\ndate: 2026-04-10\ntags: [spot, chefe, stakeholder, camil, decisor]\nprojeto: global\nlinks: [[spot]] [[camil]] [[loja_perfeita]]\nweight: 0.95\nlast_updated: 2026-04-14\n---\n\n## Cargo\nGerenteLocal na SPOT...",
+    "exemplo_decisao": "---\nname: PPT Loja Perfeita Aprovado\ndescription: Aprovação de Weverson para PPT v2 com 1140 promotores\ntype: decisao\ndate: 2026-04-14\ntags: [loja-perfeita, pptx, aprovacao, camil, rollout]\nprojeto: loja_perfeita\nlinks: [[loja_perfeita]] [[weverson]] [[camil]]\nweight: 0.98\n---\n\n## Decisão\nPPT [[loja_perfeita]] v2 **aprovado por [[weverson]]**..."
+  },
+
+  "grafo_visual_interativo": {
+    "descricao": "output/grafo_memoria.html gerado automaticamente por auto_memoria.py",
+    "tecnologia": "vis.js (library JavaScript)",
+    "visual": "Modelo atômico: nós como esferas coloridas, arestas como arcos curvados",
+    "cores": {
+      "conceito": "#7BC043 (verde lima)",
+      "pessoa": "#F5A623 (laranja)",
+      "projeto": "#00B4D8 (azul ciano)",
+      "decisao": "#D63031 (vermelho)",
+      "temperatura_recente": "Quente (vermelho) — editado recentemente",
+      "temperatura_antiga": "Fria (azul) — não editado há dias"
+    },
+    "tamanho_nó": "Proporcional ao weight (importância)",
+    "interatividade": [
+      "Clique em nó → modal lateral mostra entrada/saída (aponta para / referenciado por)",
+      "Hover → realça conexões diretas (1-hop)",
+      "Zoom + Pan: explore grafo",
+      "Filtro por tipo: mostrar só conceitos, só pessoas, etc.",
+      "Search: busque nó por nome ou tag"
+    ],
+    "atualizacao": "Automática após cada resposta via hook Stop"
+  },
+
+  "fases_bootstrap_6_passos": {
+    "descricao": "Como replicar o sistema inteiro do zero (para seu amigo)",
+    "fase_1_estrutura": {
+      "nome": "Criar Estrutura de Pastas",
+      "passos": [
+        "Crie pasta raiz: <nome-do-centro>/",
+        "Crie subpastas: memoria/, scripts/, _templates/, .claude/, output/",
+        "Crie subpastas dentro memoria/: conceitos/, pessoas/, decisoes/, sessoes/"
+      ]
+    },
+    "fase_2_arquivos_base": {
+      "nome": "Criar Arquivos Base",
+      "passos": [
+        "CLAUDE.md raiz (50 linhas, enxugado) — missão, protocolo 7 regras, stack, tabela projetos",
+        "memoria/MEMORY.md (índice) — grupos por tipo + tags",
+        "memoria/PADRAO_MEMORIA.md (template) — formato Nível 4",
+        "memoria/RAG_GUIA.md — como buscar semanticamente",
+        "memoria/DECAY_CONFIG.json — parâmetros de decay (dias/90, piso 0.1)",
+        "memoria/user_profile.md — seu perfil (cargo, empresa, ferramentas)",
+        "memoria/feedback_memoria.md — regras de colaboração"
+      ]
+    },
+    "fase_3_scripts_python": {
+      "nome": "Copiar Scripts Python",
+      "passos": [
+        "Copie 15 scripts de scripts/ para <raiz>/scripts/",
+        "Instale dependências: pip install -r requirements.txt (gere com pip freeze)",
+        "Dependências principais: openpyxl, pandas, networkx, flask, chroma-client"
+      ]
+    },
+    "fase_4_configuracao": {
+      "nome": "Configurar Claude Code",
+      "passos": [
+        "Crie .claude/settings.local.json com hooks Stop + PreToolUse",
+        "Substitua <RAIZ> pelo caminho absoluto (ex: C:\\Users\\seu_usuario\\seu_centro\\)",
+        "Teste hooks: /model (deve sugerir) e ao final de resposta (deve rodar auto_memoria.py)"
+      ]
+    },
+    "fase_5_bootstrap_prompt": {
+      "nome": "Executar Prompt de Bootstrap",
+      "passos": [
+        "Abra Claude Code na pasta raiz",
+        "Cole o prompt_inicializacao (veja abaixo)",
+        "Responda 3 perguntas: empresa, clientes/projetos, seu cargo",
+        "Agente cria estrutura + conceitos iniciais"
+      ]
+    },
+    "fase_6_primeira_sessao": {
+      "nome": "Primeira Sessão Completa",
+      "passos": [
+        "Use /iniciar para carregar contexto",
+        "Trabalhe normalmente",
+        "Hook Stop regenera grafo automaticamente",
+        "Ao encerrar: /encerrar ou role Stop (trigger hook)"
+      ]
+    }
+  },
+
+  "prompt_inicializacao_completo": "Você é meu agente de inteligência analítica corporativa. Vamos configurar um centro de inteligência estilo Obsidian com memória agressiva (Nível 4-6) — grafo de conhecimento, RAG local, decay temporal, hooks automáticos.\n\nTarefa: criar a estrutura completa nesta pasta raiz.\n\n### 1. CLAUDE.md RAIZ (55 linhas)\n\n**Seções obrigatórias:**\n- Missão do agente\n- Protocolo de Memória Automática (7 regras AGRESSIVAS)\n- Comportamento esperado (ao iniciar, durante, cruzamento entre projetos)\n- Stack tecnológico (BI, SQL, Python, ferramentas)\n- Tabela de projetos ativos (nome | tipo | pasta | status)\n- Convenções globais (arquivos snake_case, datas YYYY-MM-DD, etc.)\n\n### 2. PASTA memoria/ com arquivos base\n\n**Arquivos OBRIGATÓRIOS:**\n- `memoria/MEMORY.md` — índice agrupado por tipo (user, feedback, project, reference, conceito, pessoa, decisao) + tags para filtro\n- `memoria/PADRAO_MEMORIA.md` — template frontmatter Nível 4 (name, description, type, date, tags, projeto, links, weight)\n- `memoria/RAG_GUIA.md` — guia de busca semântica em sua base\n- `memoria/DECAY_CONFIG.json` — configuração: dias_para_decay = 90, piso_weight = 0.1\n- `memoria/user_profile.md` — seu perfil (cargo, empresa, ferramentas que usa, conhecimento técnico)\n- `memoria/feedback_memoria.md` — regras de como colaborar melhor, preferências\n\n**Subpastas:**\n- `memoria/conceitos/` — notas atômicas (1 conceito = 1 arquivo)\n- `memoria/pessoas/` — stakeholders, chefes, clientes\n- `memoria/decisoes/` — decisões tomadas em conversa (YYYY-MM-DD_titulo.md)\n- `memoria/sessoes/` — diários automáticos (sessao_YYYY-MM-DD.md)\n\n### 3. PASTA scripts/ com 15 scripts Python\n\nCopie para `scripts/`:\n- `auto_memoria.py` — Hook Stop (grafo + backlinks + timeline + sessão)\n- `classificar_modelo.py` — Hook PreToolUse (Haiku vs Sonnet)\n- `grafo_memoria.py` — constrói grafo JSON/HTML\n- `rag_memoria.py` — busca semântica\n- `rag_reranker.py` — melhora ranking (recência+importância+frequência)\n- `memory_decay.py` — decay exponencial\n- `entity_extractor.py` — NER automática (pessoas, conceitos, decisões)\n- `anomaly_detector.py` — detecta problemas (links quebrados, orfãos, gaps)\n- `gap_analyzer.py` — encontra informações faltantes\n- `timeline_generator.py` — timeline visual de eventos\n- Mais 5: exemplos, validadores, utilitários\n\n**Dependências:**\n```\nopenpyxl\npandas\nnetworkx\nflask\nchroma-db\nopenai  (ou hugging-face para embeddings)\n```\n\n### 4. PASTA _templates/ com templates reutilizáveis\n\n- `_templates/BOOTSTRAP_INTELIGENCIA.json` — este arquivo (para replicar)\n- `_templates/ROADMAP_MEMORIA_AVANCADA.md` — 8 níveis de evolução\n- `_templates/TEMPLATE_CLAUDE_PROJETO.md` — template para novos projetos\n\n### 5. .claude/settings.local.json com hooks\n\n```json\n{\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"hooks\": {\n    \"Stop\": [{\n      \"matcher\": \"\",\n      \"hooks\": [{\"type\": \"command\", \"command\": \"py '<RAIZ>/scripts/auto_memoria.py'\"}]\n    }],\n    \"PreToolUse\": [{\n      \"matcher\": \"Bash|Write|Edit|Agent|NotebookEdit\",\n      \"hooks\": [{\"type\": \"command\", \"command\": \"py '<RAIZ>/scripts/classificar_modelo.py'\"}]\n    }]\n  }\n}\n```\n\nSubstituir `<RAIZ>` pelo caminho absoluto.\n\n### 6. Perguntas Iniciais\n\n**Depois de criar a estrutura, faça estas 3 perguntas:**\n1. Qual é a empresa e segmento de negócio? (ex: SPOT — Trade Marketing)\n2. Quais são os principais clientes/projetos ativos? (ex: Camil, Loja Perfeita, Backlight)\n3. Qual é seu cargo e quais ferramentas você usa? (ex: BI Senior, Power BI, SQL, Python)\n\nCom as respostas, preencha `memoria/user_profile.md`, crie conceitos iniciais, registre projetos na tabela `CLAUDE.md`.\n\n### 7. Protocolo de Memória (REGRAS 1-7)\n\nAo receber informação → salvar IMEDIATAMENTE:\n- Pessoa mencionada? → `memoria/pessoas/<nome>.md`\n- Conceito novo? → `memoria/conceitos/<nome>.md`\n- Decisão? → `memoria/decisoes/YYYY-MM-DD_<titulo>.md`\n- Wikilinks agressivos: `[[pessoa]]`, `[[conceito]]`, `[[projeto]]`\n- Atualizar existente, nunca duplicar\n- Badge `📝 Memória: [criado: ...] [atualizado: ...]` ao final\n- Ao encerrar: hook Stop executa auto_memoria.py",
+
+  "roadmap_8_niveis": {
+    "descricao": "Evolução do sistema (de Nível 1 estático até Nível 8 proativo)",
+    "nivel_1": {
+      "nome": "Memória Estática",
+      "features": ["Arquivos .md em pasta", "Nenhuma automação"],
+      "status": "✅ Implementado"
+    },
+    "nivel_2": {
+      "nome": "Índice Semântico + Tags",
+      "features": ["MEMORY.md com índice", "Frontmatter com tags e tipo", "Wikilinks básicos"],
+      "status": "✅ Implementado"
+    },
+    "nivel_3": {
+      "nome": "RAG Local + Embeddings",
+      "features": ["Busca semântica em memoria/", "ChromaDB para caching", "Ranking por similaridade"],
+      "status": "✅ Implementado (rag_memoria.py)"
+    },
+    "nivel_4": {
+      "nome": "Grafo de Conhecimento",
+      "features": ["Nós e arestas extraídos de wikilinks", "Visualização interativa (vis.js)", "Backlinks automáticos", "Peso de nó (importância)"],
+      "status": "✅ Implementado (auto_memoria.py)"
+    },
+    "nivel_5": {
+      "nome": "Memória Temporal + Decay",
+      "features": ["Timeline de eventos", "Decay exponencial de notas antigas", "Recência como fator de busca", "Anomalia detection"],
+      "status": "✅ Implementado (memory_decay.py + anomaly_detector.py)"
+    },
+    "nivel_6": {
+      "nome": "Extração Automática + Hooks",
+      "features": ["NER para detectar pessoas, conceitos, decisões", "Hook PreToolUse (classifica tarefa)", "Hook Stop (regenera grafo)", "Gap analysis automático"],
+      "status": "✅ Parcialmente Implementado (entity_extractor.py + hooks)"
+    },
+    "nivel_7": {
+      "nome": "Multi-Agente Especializado",
+      "features": ["Agente dados (analista)", "Agente design (criatividade)", "Agente negócio (strategy)", "Agente memória (orchestrador)", "Comunicação entre agentes"],
+      "status": "❌ Futuro (roadmap 2026-Q2)"
+    },
+    "nivel_8": {
+      "nome": "Inteligência Proativa",
+      "features": ["Alertas automáticos (cron/webhook)", "Recomendações antecipadas", "Ações automáticas (criar nota, atualizar decisão)", "Integração com sistemas externos (GitHub, Slack)"],
+      "status": "❌ Futuro (roadmap 2026-Q3+)"
+    }
+  },
+
+  "convencoes_globais": {
+    "nomes_de_arquivos": "snake_case (ex: pesquisa_cod_regional.md)",
+    "datas_em_nomes": "YYYY-MM-DD (ex: sessao_2026-04-14.md)",
+    "datas_em_conversas": "Converter relativo → absoluto ao salvar na memória",
+    "variaveis_python": "snake_case",
+    "idioma_anotacoes": "português (BR)",
+    "pasta_memoria": "memoria/ (sem ponto, totalmente visível)",
+    "pasta_dados_projeto": "data/ ou DATA/ dentro de cada projeto",
+    "pasta_outputs": "output/ dentro de cada projeto + output/ raiz",
+    "wikilinks": "[[nome_conceito]] para referências bidirecionais (apenas se arquivo existe)",
+    "commits": "Padrão: feat(sql_camil): explorado dimensão xyz | fix(loja_perfeita): ajustado PPT | docs(memoria): atualizado conceito X"
+  },
+
+  "exemplo_uso_completo": {
+    "cenario": "Você é novo na empresa ACME Corp. Quer aprender a base de dados do cliente XYZ.",
+    "passo_1": "Abra Claude Code na pasta raiz do seu centro → execute /iniciar",
+    "passo_2": "Sistema carrega CLAUDE.md + MEMORY.md + últimas sessões",
+    "passo_3": "Você começa a explorar: 'quais são as tabelas da base?'",
+    "passo_4": "Agente descobre + documenta + cria memoria/conceitos/ para cada dimensão",
+    "passo_5": "Ao explorar a terceira tabela, agente conecta: 'tabela A relaciona com tabela B (já explorada)' → grafo reflete",
+    "passo_6": "Você termina → /encerrar ou role Stop",
+    "passo_7": "Hook Stop: roda auto_memoria.py → regenera grafo, cria sessao_2026-04-14.md, atualiza todos os backlinks",
+    "passo_8": "Próxima sessão: /iniciar carrega contexto completo (com RAG): você sabe exatamente onde parou"
+  },
+
+  "faq": {
+    "p1_como_replicar": "Use prompt_inicializacao (acima) em nova pasta. Agente cria estrutura automática em 10 min.",
+    "p2_por_que_haiku": "Haiku é 10x mais barato que Sonnet. Complexidade é detectada automaticamente (hook PreToolUse).",
+    "p3_backup_memoria": "Pasta memoria/ é seu backup. Versione no Git. Grafo é gerado — não versione output/.",
+    "p4_RAG_vs_busca": "RAG busca semanticamente (meaningful). Tradicional busca por palavra-chave. Use RAG para encontrar insights escondidos.",
+    "p5_decay_agressivo": "Notas antigas (<90 dias sem edição) perdem peso. Força a reatualizar conhecimento obsoleto.",
+    "p6_integracao_github": "Nível 8 (futuro): commits automáticos, issues → notas, pull requests → decisões.",
+    "p7_privacy": "Tudo local. Embeddings podem ser offline (Hugging Face). ChromaDB é local."
+  }
+}
